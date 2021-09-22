@@ -71,7 +71,7 @@ var hrPeriods = [
         time: "17",
         ampm: "pm",
         note: ""
-    },
+    }
 ]
 
 // convert calendar items to string for local storage
@@ -81,19 +81,58 @@ function saveCalItems() {
 
 // show saved data
 function showCalItems() {
-    hrPeriods.forEach(function(_thishr) {
-        $('#${_thishr.id}').val(_thishr.note);
+    hrPeriods.forEach(function(_thisHour) {
+        $('#${_thishr.id}').val(_thisHour.note);
     })
 }
 
 // convert saved items from string to object
 function init() {
     var storedCalItem = JSON.parse(localStorage.getItem("hrPeriods"));
+
     if (storedCalItem) {
+
         hrPeriods = storedCalItem;
     }
+
     saveCalItems();
     showCalItems();
 }
 
+// create time blocks
+hrPeriods.forEach(function(thisHour) {
+    var hrRow = $("<form>").attr({
+        "class": "row"
+    });
+    $(".container").append(hrRow);
 
+    // time fields
+    var hrFields = $("<div>")
+    .text('${thishr.hr}${thishr.ampm}')
+    .attr({
+        "class": "col-md-2 hour"
+    });
+
+    // create cal items
+    var hourItem = $("<div>")
+    .attr({
+        "class": "col-md-9 description p-0"
+    });
+    var planData = $("<textarea>");
+    hrFields.append(planData);
+    planData.attr("id", thisHour.id)
+    if (thisHour.time < currentTime) {
+        planData.attr ({
+            "class": "past",
+        })
+    } else if (thisHour.time === currentTime) {
+        planData.attr({
+            "class": "present",
+        })
+    } else if (thisHour.time > currentTime) {
+        planData.attr({
+            "class": "future"
+        })
+    }
+
+})
