@@ -123,18 +123,19 @@ hrPeriods.forEach(function(thisHour) {
     planData.attr("id", thisHour.id)
     if (thisHour.time < currentTime) {
         planData.attr ({
-            "class": "past",
+            "class": "col-md-12 description p-4 past",
         })
     } else if (thisHour.time === currentTime) {
         planData.attr({
-            "class": "present",
+            "class": "col-md-12 description p-4 present",
         })
     } else if (thisHour.time > currentTime) {
         planData.attr({
-            "class": "future"
+            "class": "col-md-12 description p-4 future"
         })
     }
 
+    // save buttons
     var saveButton = $("<i class='far fa-save fa-lg'></i>")
     var savePlan = $("<button>")
     .attr({
@@ -145,15 +146,18 @@ hrPeriods.forEach(function(thisHour) {
 
 })
 
+// loads from local storage
 init();
 
 // save data for local storage
 $(".saveBtn").on("click", function(event) {
     event.preventDefault();
-    var saveIndex = $(this).siblings(".description").children(".future").attr("id");
-    hrPeriods[saveIndex].notes = $(this).siblings(".description").children(".future").val();
+    var saveIndex = $(this).siblings(".description").children(".col-md-12").attr("id");
+    console.log(event.target);
+    hrPeriods[saveIndex].notes = $(this).siblings(".description").children(".col-md-12").val();
     console.log(saveIndex);
-
+    
+    alert("Notes Saved!")
     saveCalItems();
     showCalItems();
 })
