@@ -10,7 +10,7 @@ Hours will indicate if they are past (grey), present (blue) or future (green).
 
 Example of deployed site below:
 
-![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/images/05-third-party-apis-homework-demo.gif)
+![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/images/DayPlanner.png)
 
 ## User Story
 
